@@ -1,0 +1,167 @@
+﻿@page
+@model SmartInventorySystem.Pages.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container">
+    @if (!string.IsNullOrEmpty(Model.StatusMessage))
+    {
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            @Model.StatusMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <h1 class="display-4 mb-4">Smart Inventory Dashboard</h1>
+
+    <div class="alert alert-success">
+        <strong>Welcome, @Model.UserInfo</strong>
+        @if (Model.IsAdmin)
+        {
+            <span class="badge bg-danger ms-2">Admin</span>
+        }
+        @if (Model.IsStaff)
+        {
+            <span class="badge bg-primary ms-2">Staff</span>
+        }
+    </div>
+
+    <!-- Dashboard Stats -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Products</h5>
+                    <p class="card-text display-5">@Model.TotalProducts</p>
+                    <a href="/Products/Index" class="text-white">View Products →</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Low Stock Items</h5>
+                    <p class="card-text display-5">@Model.LowStockProducts</p>
+                    <a href="/Products/Index" class="text-white">View Products →</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Suppliers</h5>
+                    <p class="card-text display-5">@Model.TotalSuppliers</p>
+                    <a href="/Suppliers/Index" class="text-white">View Suppliers →</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-info text-white mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Inventory Value</h5>
+                    <p class="card-text display-5">@Model.InventoryValue.ToString("C")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @if (Model.IsAdmin)
+                        {
+                            <div class="col-md-3 mb-3">
+                                <a href="/Products/Create" class="btn btn-primary w-100">
+                                    <i class="bi bi-plus-circle"></i> Add Product
+                                </a>
+                            </div>
+                        }
+                        <div class="col-md-3 mb-3">
+                            <a href="/StockMovements/Add" class="btn btn-success w-100">
+                                <i class="bi bi-box-arrow-in-right"></i> Add Stock
+                            </a>
+                        </div>
+                        @if (Model.IsAdmin)
+                        {
+                            <div class="col-md-3 mb-3">
+                                <a href="/Suppliers/Create" class="btn btn-info w-100">
+                                    <i class="bi bi-people"></i> Add Supplier
+                                </a>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <a href="/Users/Index" class="btn btn-warning w-100">
+                                    <i class="bi bi-person-plus"></i> Manage Users
+                                </a>
+                            </div>
+                        }
+                        <div class="col-md-3 mb-3">
+                            <a href="/StockMovements/History" class="btn btn-secondary w-100">
+                                <i class="bi bi-clock-history"></i> View History
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Low Stock Products -->
+    @if (Model.LowStockProducts > 0)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h5 class="mb-0">Low Stock Products</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Current Stock</th>
+                                        <th>Reorder Level</th>
+                                        <th>Supplier</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var product in Model.LowStockProductsList)
+                                    {
+                                        <tr>
+                                            <td>@product.Name</td>
+                                            <td>@product.QuantityInStock</td>
+                                            <td>@product.ReorderLevel</td>
+                                            <td>@product.Supplier?.Name</td>
+                                            <td>
+                                                <a href="/StockMovements/Add" class="btn btn-sm btn-success">Add Stock</a>
+                                                @if (Model.IsAdmin)
+                                                {
+                                                    <a href="/Products/Edit/@product.ProductId" class="btn btn-sm btn-primary">Edit</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        // Any dashboard-specific JavaScript can go here
+    </script>
+}

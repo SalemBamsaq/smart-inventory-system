@@ -1,0 +1,41 @@
+﻿@page "{id}"
+@model SmartInventorySystem.Pages.Users.UnlockModel
+@{
+    ViewData["Title"] = "Unlock User";
+}
+
+<h1>Unlock User</h1>
+
+<div class="alert alert-warning">
+    <h3>Are you sure you want to unlock this user?</h3>
+    <p>This will reset the account lockout and allow the user to log in again.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>User Details</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Name</dt>
+            <dd class="col-sm-9">@Model.User.FullName</dd>
+
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.User.Email</dd>
+
+            <dt class="col-sm-3">Department</dt>
+            <dd class="col-sm-9">@Model.User.Department</dd>
+
+            <dt class="col-sm-3">Job Title</dt>
+            <dd class="col-sm-9">@Model.User.JobTitle</dd>
+        </dl>
+    </div>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="User.Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <button type="submit" class="btn btn-success">Unlock User</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+</form>

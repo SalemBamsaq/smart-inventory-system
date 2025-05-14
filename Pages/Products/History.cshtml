@@ -1,0 +1,74 @@
+﻿@page "{id:int}"
+@model SmartInventorySystem.Pages.Products.HistoryModel
+@{
+    ViewData["Title"] = "Product History";
+}
+
+<h1>Product History - @Model.Product.Name</h1>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Product Details</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Product Name</dt>
+            <dd class="col-sm-9">@Model.Product.Name</dd>
+
+            <dt class="col-sm-3">Category</dt>
+            <dd class="col-sm-9">@Model.Product.Category</dd>
+
+            <dt class="col-sm-3">Supplier</dt>
+            <dd class="col-sm-9">@Model.Product.Supplier?.Name</dd>
+
+            <dt class="col-sm-3">Current Stock</dt>
+            <dd class="col-sm-9">@Model.Product.QuantityInStock</dd>
+
+            <dt class="col-sm-3">Reorder Level</dt>
+            <dd class="col-sm-9">@Model.Product.ReorderLevel</dd>
+
+            <dt class="col-sm-3">Unit Price</dt>
+            <dd class="col-sm-9">@Model.Product.UnitPrice.ToString("C")</dd>
+
+            <dt class="col-sm-3">Last Updated</dt>
+            <dd class="col-sm-9">@Model.Product.LastUpdated.ToString("g")</dd>
+        </dl>
+    </div>
+</div>
+
+<h3>Stock Movement History</h3>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Movement Type</th>
+                <th>Quantity</th>
+                <th>Date/Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Movements)
+            {
+                <tr>
+                    <td>@item.MovementType</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.Timestamp.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@if (!Model.Movements.Any())
+{
+    <div class="alert alert-info">
+        No stock movements recorded for this product yet.
+    </div>
+}
+
+<div>
+    <a asp-page="./Index" class="btn btn-secondary">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Product.ProductId" class="btn btn-primary">Edit Product</a>
+    <a asp-page="/StockMovements/Add" class="btn btn-success">Add Stock</a>
+</div>

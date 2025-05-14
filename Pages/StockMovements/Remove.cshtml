@@ -1,0 +1,39 @@
+﻿@page "{id:int}"
+@model SmartInventorySystem.Pages.StockMovements.RemoveModel
+@{
+    ViewData["Title"] = "Remove Stock Movement";
+}
+
+<h1>Remove Stock Movement</h1>
+
+<div class="alert alert-danger">
+    <h3>Are you sure you want to remove this stock movement?</h3>
+    <p>This action cannot be undone and may affect inventory levels.</p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h5>Stock Movement Details</h5>
+    </div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Product</dt>
+            <dd class="col-sm-9">@Model.StockMovement.Product?.Name</dd>
+
+            <dt class="col-sm-3">Movement Type</dt>
+            <dd class="col-sm-9">@Model.StockMovement.MovementType</dd>
+
+            <dt class="col-sm-3">Quantity</dt>
+            <dd class="col-sm-9">@Model.StockMovement.Quantity</dd>
+
+            <dt class="col-sm-3">Date/Time</dt>
+            <dd class="col-sm-9">@Model.StockMovement.Timestamp.ToString("g")</dd>
+        </dl>
+    </div>
+</div>
+
+<form method="post">
+    <input type="hidden" asp-for="StockMovement.Id" />
+    <button type="submit" class="btn btn-danger">Remove</button>
+    <a asp-page="./History" class="btn btn-secondary">Cancel</a>
+</form>

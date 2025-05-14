@@ -1,0 +1,64 @@
+﻿@page
+@model SmartInventorySystem.Pages.Products.CreateModel
+@{
+    ViewData["Title"] = "Create Product";
+}
+
+<h1>Create Product</h1>
+
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Product.Name" class="control-label"></label>
+                <input asp-for="Product.Name" class="form-control" />
+                <span asp-validation-for="Product.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Product.Category" class="control-label"></label>
+                <input asp-for="Product.Category" class="form-control" />
+                <span asp-validation-for="Product.Category" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Product.SupplierId" class="control-label">Supplier</label>
+                <select asp-for="Product.SupplierId" class="form-control" asp-items="Model.Suppliers">
+                    <option value="">-- Select Supplier --</option>
+                </select>
+                <span asp-validation-for="Product.SupplierId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Product.QuantityInStock" class="control-label"></label>
+                <input asp-for="Product.QuantityInStock" class="form-control" />
+                <span asp-validation-for="Product.QuantityInStock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Product.ReorderLevel" class="control-label"></label>
+                <input asp-for="Product.ReorderLevel" class="form-control" />
+                <span asp-validation-for="Product.ReorderLevel" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Product.UnitPrice" class="control-label"></label>
+                <input asp-for="Product.UnitPrice" class="form-control" />
+                <span asp-validation-for="Product.UnitPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-page="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

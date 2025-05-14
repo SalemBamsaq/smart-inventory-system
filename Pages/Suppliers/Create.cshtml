@@ -1,0 +1,35 @@
+﻿@page
+@model SmartInventorySystem.Pages.Suppliers.CreateModel
+@{
+    ViewData["Title"] = "Create Supplier";
+}
+
+<h1>Create Supplier</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Supplier.Name" class="control-label"></label>
+        <input asp-for="Supplier.Name" class="form-control" />
+        <span asp-validation-for="Supplier.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Supplier.ContactPerson" class="control-label"></label>
+        <input asp-for="Supplier.ContactPerson" class="form-control" />
+        <span asp-validation-for="Supplier.ContactPerson" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Supplier.Email" class="control-label"></label>
+        <input asp-for="Supplier.Email" class="form-control" />
+        <span asp-validation-for="Supplier.Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Supplier.Phone" class="control-label"></label>
+        <input asp-for="Supplier.Phone" class="form-control" />
+        <span asp-validation-for="Supplier.Phone" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

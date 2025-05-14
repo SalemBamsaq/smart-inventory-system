@@ -1,0 +1,40 @@
+﻿@page
+@model SmartInventorySystem.Pages.StockMovements.AddModel
+@{
+    ViewData["Title"] = "Add Stock";
+}
+
+<h1>Add Stock</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="StockMovement.ProductId" class="control-label">Product</label>
+                <select asp-for="StockMovement.ProductId" class="form-control" asp-items="Model.ProductList">
+                    <option value="">-- Select Product --</option>
+                </select>
+                <span asp-validation-for="StockMovement.ProductId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="StockMovement.Quantity" class="control-label"></label>
+                <input asp-for="StockMovement.Quantity" class="form-control" />
+                <span asp-validation-for="StockMovement.Quantity" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Add Stock</button>
+                <a asp-page="History" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

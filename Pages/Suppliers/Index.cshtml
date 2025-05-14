@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Suppliers";
+}
+
+<h2>Suppliers</h2>
+
+<a asp-page="Create" class="btn btn-primary mb-3">➕ Add New Supplier</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Contact Person</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var supplier in Model.Suppliers)
+        {
+            <tr>
+                <td>@supplier.Name</td>
+                <td>@supplier.Email</td>
+                <td>@supplier.Phone</td>
+                <td>@supplier.ContactPerson</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@supplier.SupplierId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-page="Delete" asp-route-id="@supplier.SupplierId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
