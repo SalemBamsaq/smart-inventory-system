@@ -182,7 +182,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 Salem Bamsaq - Full Stack .NET Developer
 
 - GitHub: [SalemBamsaq](https://github.com/SalemBamsaq)
-- LinkedIn: [Salem Bamsaq](https://www.linkedin.com/in/salem-bamsaq)
+- LinkedIn: [Salem Bamsaq](https://www.linkedin.com/in/salem-bamsaq-230565366/)
 
 ## 🙏 Acknowledgments
 
